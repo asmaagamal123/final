@@ -4,45 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Medicine;
+
 class MedicineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function conflictingMaterials($name)
     {
-        //
+        $medicine = Medicine::where('name', $name)->first();
+
+        if (!$medicine) {
+            return response()->json(['error' => 'Medicine not found'], 404);
+        }
+
+        $conflictingMaterials = $medicine->conflictingMaterials->pluck('conflicting_material');
+
+        return response()->json(['conflicting_materials' => $conflictingMaterials]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }
+
+

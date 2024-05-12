@@ -9,22 +9,27 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    { Schema::create('drug_interactions', function (Blueprint $table) {
+   // In the migration file created for the pivot table
+public function up()
+{
+    Schema::create('medicine_user', function (Blueprint $table) {
         $table->id();
         $table->unsignedBigInteger('medicine_id');
-        $table->string('interacting_drug_name');
+        $table->unsignedBigInteger('user_id');
+        $table->integer('duration'); // duration of when this medicine should be taken
         $table->timestamps();
-    
+
         $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
     });
-    }
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('drug_interactions');
+        Schema::dropIfExists('medicine_user');
     }
 };
