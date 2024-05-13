@@ -1,13 +1,8 @@
 <?php
-
-
+use App\Http\Controllers\CustommedicineController;
+use App\Http\Controllers\MedicineController;
  use Illuminate\Http\Request;
  use Illuminate\Support\Facades\Route;
-
-     
-
-
-
 // routes/api.php
 Route::get('medicine/{name}/conflicting-materials', 'MedicineController@conflictingMaterials');
 // In routes/api.php
@@ -17,9 +12,10 @@ Route::post('login', 'AuthController@login');
 Route::post('signup', 'UserController@signup');
 // routes/api.php
 
-Route::post('users/{userId}/attach-medicine/{medicineId}/{duration}', 'UserController@attachMedicine');
-Route::get('users/{userId}/medicines', 'UserController@getUserMedicines');
 
+Route::get('/medicines', [CustommedicineController ::class, 'index']);
+Route::post('/medicines', [CustommedicineController ::class, 'store']);
+Route::get('/medicines/{id}', [CustommedicineController ::class, 'show']);
 
   Route::middleware('auth:api')->get('/user', function (Request $request) {
      return $request->user();

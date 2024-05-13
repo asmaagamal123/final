@@ -9,15 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('medicines', function (Blueprint $table) {
+        Schema::create('custom_users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('manufactured_materials');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->integer('age');
+            $table->date('date');
+            $table->integer('weight');
+            $table->integer('height');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('custom_users');
     }
 };

@@ -23,10 +23,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function medicines()
-{
-    return $this->belongsToMany(Medicine::class)->withPivot('duration');
-}
+
+ 
 }
 

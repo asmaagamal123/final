@@ -2,20 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
-    
-    public function conflictingMaterials()
-    {
-        return $this->hasMany(ConflictingMaterial::class);
-    }
+    protected $table = 'custom_medicines';
+    protected $fillable = ['name', 'type', 'duration'];
 
     public function users()
-{
-    return $this->belongsToMany(User::class)->withPivot('duration');
+    {
+        return $this->belongsToMany(User::class, 'custom_user_medicine')->withPivot('duration');
+    }
 }
-}
-

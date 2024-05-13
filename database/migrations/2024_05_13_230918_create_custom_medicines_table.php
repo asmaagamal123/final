@@ -9,15 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('medicines', function (Blueprint $table) {
+        Schema::create('custom_medicines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('manufactured_materials');
+            $table->string('type');
+            $table->integer('duration');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('custom_medicines');
     }
 };
